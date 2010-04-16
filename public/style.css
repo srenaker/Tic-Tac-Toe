@@ -1,0 +1,23 @@
+.board {
+
+}
+
+td {
+	border: 3px solid black;
+	height: 75px;
+	width: 75px;
+	cursor: pointer;
+}
+
+.nought {
+	background-image: url('/nought.png');
+	background-repeat: no-repeat;
+	background-position: middle center;
+}
+
+.cross {
+	background-image: url('/cross.png');
+	background-repeat: no-repeat;
+	background-position: middle center;
+}
+
