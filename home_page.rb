@@ -7,7 +7,7 @@ class HomePage < Erector::Widget
       head do
         title 'Tic Tac Toe'
         link :href => "/style.css", :rel => "stylesheet", :type => "text/css"   
-        script :src => '/tictactoe.js', :type => 'text/javascript'
+        script :src => '/tictactOO.js', :type => 'text/javascript'
         script :src => '/jquery.js', :type => 'text/javascript'
       end
       
@@ -38,7 +38,7 @@ class HomePage < Erector::Widget
         y = 0
         size.times do 
           square_id = "#{x}#{y}"
-          td :class => 'empty', :id => square_id, :onclick => "move(#{x},#{y})" do
+          td :class => 'empty', :id => square_id, :onclick => "g.move(#{x},#{y})" do
             rawtext '&nbsp;'
           end
           y += 1
