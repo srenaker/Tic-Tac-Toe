@@ -6,9 +6,9 @@ class HomePage < Erector::Widget
     html do
       head do
         title 'Tic Tac Toe'
-        link :href => "/style.css", :rel => "stylesheet", :type => "text/css"   
-        script :src => '/tictactOO.js', :type => 'text/javascript'
-        script :src => '/jquery.js', :type => 'text/javascript'
+        link :href => "/css/style.css", :rel => "stylesheet", :type => "text/css"   
+        script :src => '/js/tictactoe.js', :type => 'text/javascript'
+        script :src => '/js/jquery.js', :type => 'text/javascript'
       end
       
       body do

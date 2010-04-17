@@ -10,13 +10,13 @@ td {
 }
 
 .nought {
-	background-image: url('/nought.png');
+	background-image: url('/images/nought.png');
 	background-repeat: no-repeat;
 	background-position: middle center;
 }
 
 .cross {
-	background-image: url('/cross.png');
+	background-image: url('/images/cross.png');
 	background-repeat: no-repeat;
 	background-position: middle center;
 }

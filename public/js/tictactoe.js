@@ -17,8 +17,8 @@ Game.prototype = {
 	 	return $(squareId).hasClass('empty');
 	},
 	
-	updateTurn : function(currTurn){
-		(currTurn == 'nought') ? this.turn = 'cross' : this.turn = 'nought';
+	updateTurn : function(currentTurn){
+		(currentTurn == 'nought') ? this.turn = 'cross' : this.turn = 'nought';
 		$('.whose_turn').html(this.turn);
 	}
 }
