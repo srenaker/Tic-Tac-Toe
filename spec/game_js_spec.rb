@@ -20,17 +20,26 @@ describe 'Game' do
   end
   
   describe 'game play' do
-    before do
-      js("$('#00').click();")
-    end
     
-    it "updates a square's class when clicked" do
+    it "updates a square's class a move is made" do
+      js("g.move(0,0);")
       js("$('#00').hasClass('nought')").should be_true
       js("$('#00').hasClass('empty')").should be_false      
     end
     
+    it "knows whether a square is empty or not" do
+      js("g.squareEmpty(1,2)").should be_true
+      js("g.move(1,2);")
+      js("g.squareEmpty(1,2)").should be_false     
+    end
+    
     it "updates the page to show whose turn it is" do
+      js("g.updateTurn('nought');")
       js("$('.whose_turn').text()").should == "cross"
+    end
+    
+    it "notices when someone has won" do
+      
     end
   end
   

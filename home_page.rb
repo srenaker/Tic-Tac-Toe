@@ -32,19 +32,19 @@ class HomePage < Erector::Widget
   end
 
   def draw_board(size)
-    x = 0
+    y = 0
     size.times do 
       tr :class => 'board_row' do
-        y = 0
+        x = 0
         size.times do 
           square_id = "#{x}#{y}"
           td :class => 'empty', :id => square_id, :onclick => "g.move(#{x},#{y})" do
             rawtext '&nbsp;'
           end
-          y += 1
+          x += 1
         end
       end
-      x += 1
+      y += 1
     end
   end
 
