@@ -28,16 +28,49 @@ Game.prototype = {
 	},
 	
 	victory : function() {
-		var weHaveAWinner = false;
 		for (var player in this.players) {
-			weHaveAWinner = this.lookAcross(this.players[player]);
-			if (weHaveAWinner) {
-				return player;
+			currentPlayer = this.players[player];
+			if (this.lookAcross(currentPlayer) || this.lookDown(currentPlayer) || this.lookDiagonal(currentPlayer)) {
+				return currentPlayer;
 			}
-			//lookDown(this.players[player]);
-			//lookDiagonal(this.players[player]);
 		}
 		return false;
+	},
+	
+	lookDiagonal : function(currentPlayer) {
+		if (this.lookDiagonalY(0, 'down', currentPlayer) || this.lookDiagonalY(2, 'up', currentPlayer)) {
+			return currentPlayer;
+		}
+		return false;
+	},
+	
+	lookDiagonalY : function(y, dir, player) {
+		for (x = 0; x < 3; x++) {
+			if (!$("#" + x + y).hasClass(player)) {
+				return false; 
+			}
+			dir == 'down' ?	y++ : y--;
+		}
+		return player;
+	},
+	
+	lookDown : function(player) {
+		var winner = null;
+		for (x = 0; x < 3; x++) {
+			winner = this.lookDownX(x, player);
+			if (winner) {
+				return winner;
+			}
+		}
+	},
+	
+	lookDownX : function(x, player){
+		for (y = 0; y < 3; y++) {
+			if (!$("#" + x + y).hasClass(player)) {
+				return false;
+			}
+		}
+		return player;		
 	},
 	
 	lookAcross : function(player) {
@@ -53,15 +86,12 @@ Game.prototype = {
 	
 	lookAcrossY : function(y, player) {
 		for (x = 0; x < 3; x++) {
-			//alert('for ' + x + y + ' ' + player + ': ' +  $("#" + x + y).hasClass(player))
 			if (!$("#" + x + y).hasClass(player)) {
 				return false;
 			}
 		}
-		alert("we have a winner");
 		return player;
-	}
-	
+	}	
 }
 
 var g = new Game();
