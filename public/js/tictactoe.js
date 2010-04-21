@@ -9,11 +9,7 @@ Game.prototype = {
 	move : function(x,y) {
 		if (this.squareEmpty(x,y)){
 			$('#' + x + y).addClass(this.turn).removeClass('empty');
-			if (this.victory()) {
-					alert(this.victory() + " has won!  Nice job.");
-			} else {
-				this.updateTurn(this.turn);				
-			}
+		 	(this.victory()) ? alert(this.victory() + " has won!  Nice job.") :	this.updateTurn(this.turn);	
 		}
 	},
 	
@@ -30,12 +26,13 @@ Game.prototype = {
 	victory : function() {
 		for (var player in this.players) {
 			currentPlayer = this.players[player];
-			if (this.lookAcross(currentPlayer) || this.lookDown(currentPlayer) || this.lookDiagonal(currentPlayer)) {
+			if (this.lookDown(currentPlayer) || this.lookAcross(currentPlayer) || this.lookDiagonal(currentPlayer)) {
 				return currentPlayer;
 			}
 		}
 		return false;
 	},
+
 	
 	lookDiagonal : function(currentPlayer) {
 		if (this.lookDiagonalY(0, 'down', currentPlayer) || this.lookDiagonalY(2, 'up', currentPlayer)) {
@@ -45,17 +42,21 @@ Game.prototype = {
 	},
 	
 	lookDiagonalY : function(y, dir, player) {
+		var winningRow = [];
 		for (x = 0; x < 3; x++) {
-			if (!$("#" + x + y).hasClass(player)) {
-				return false; 
+			if ($("#" + x + y).hasClass(player)) {
+				winningRow.push([x, y]);
+			} else {
+				return false;
 			}
 			dir == 'down' ?	y++ : y--;
 		}
+		this.turnRed(winningRow);
 		return player;
 	},
 	
 	lookDown : function(player) {
-		var winner = null;
+		var winner = null;		
 		for (x = 0; x < 3; x++) {
 			winner = this.lookDownX(x, player);
 			if (winner) {
@@ -65,11 +66,15 @@ Game.prototype = {
 	},
 	
 	lookDownX : function(x, player){
+		var winningRow = [];
 		for (y = 0; y < 3; y++) {
-			if (!$("#" + x + y).hasClass(player)) {
+			if ($("#" + x + y).hasClass(player)) {
+				winningRow.push([x, y]);
+			} else {
 				return false;
-			}
+			} 
 		}
+		this.turnRed(winningRow);
 		return player;		
 	},
 	
@@ -85,12 +90,22 @@ Game.prototype = {
 	},
 	
 	lookAcrossY : function(y, player) {
+		var winningRow = [];
 		for (x = 0; x < 3; x++) {
-			if (!$("#" + x + y).hasClass(player)) {
+			if ($("#" + x + y).hasClass(player)) {
+				winningRow.push([x, y]);
+			} else {
 				return false;
 			}
 		}
+		this.turnRed(winningRow);
 		return player;
+	},
+	
+	turnRed : function(winningRow) {
+		for (coords in winningRow) {
+			$("#" + winningRow[coords][0] + winningRow[coords][1]).addClass('redSquare');
+		}
 	}	
 }
 

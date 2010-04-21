@@ -38,9 +38,35 @@ describe 'Game' do
       js("$('.whose_turn').text()").should == "cross"
     end
     
-    it "notices when someone has won" do
+    describe "it notices when someone has won" do
+
+      before do
+        js("$('#00').addClass('nought');")
+      end
+
+      it "checks for 3 across" do        
+        js("$('#10').addClass('nought');")
+        js("$('#20').addClass('nought');")
+        js("g.lookAcross('nought');").should == 'nought'
+      end
+      
+      it "checks for 3 down" do
+        js("$('#01').addClass('nought');")
+        js("$('#02').addClass('nought');")
+        js("g.lookDown('nought');").should == 'nought'        
+      end
+      
+      it "checks for 3 diagonally" do
+        js("$('#11').addClass('nought');")
+        js("$('#22').addClass('nought');")
+        js("g.lookDiagonal('nought');").should == 'nought'        
+      end
+      
+      it "turns the winning row red" do
+        js("g.turnRed([[0,0],[1,1],[2,2]])")
+        js("$('#22').hasClass('redSquare');").should be_true;
+      end
       
     end
   end
-  
 end
