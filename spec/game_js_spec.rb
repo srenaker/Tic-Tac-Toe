@@ -21,7 +21,7 @@ describe 'Game' do
   
   describe 'game play' do
     
-    it "updates a square's class a move is made" do
+    it "updates a square's class when a move is made" do
       js("g.move(0,0);")
       js("$('#00').hasClass('nought')").should be_true
       js("$('#00').hasClass('empty')").should be_false      
