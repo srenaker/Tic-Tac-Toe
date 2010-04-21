@@ -9,7 +9,7 @@ Game.prototype = {
 	move : function(x,y) {
 		if (this.squareEmpty(x,y)){
 			$('#' + x + y).addClass(this.turn).removeClass('empty');
-		 	(this.victory()) ? alert(this.victory() + " has won!  Nice job.") :	this.updateTurn(this.turn);	
+		 	(this.victory()) ? alert(this.victory() + " has won!  nice job.") :	this.updateTurn(this.turn);	
 		}
 	},
 	
